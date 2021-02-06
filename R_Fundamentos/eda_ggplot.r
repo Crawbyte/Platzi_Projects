@@ -32,3 +32,27 @@ ggplot()+geom_histogram(data=orangeec,
   theme(legend.position = 'none')+
   theme(panel.background = element_blank(),panel.grid.major = element_blank(),
         panel.grid.minor = element_blank())
+
+#EDA Boxplot
+economy <- mean(orangeec$`GDP PC`)
+orangeec <- orangeec %>%
+  mutate(Strong_economy = ifelse(`GDP PC` <economy,
+                                 'Por debajo del promedio PIB per cápita',
+                                 'Sobre el promedio PIB per cápita'))
+ggplot(orangeec, aes(x=`Strong_economy`, y=`Creat Ind % GDP`,
+                     fill=`Strong_economy`)) +
+  geom_boxplot(alpha=0.4) +
+  labs(x='Tipo de país', y='Aporte de economía naranja',
+       tittle='Aporte economía naranja en PIB de paises de LATAM con alto y bajo PIB per cápita') +
+  theme(legend.position = 'none')+
+  theme(panel.background = element_blank(),panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank())
+
+ggplot(orangeec, aes(x=`Strong_economy`, y=`Internet penetration % population`,
+                     fill=`Strong_economy`)) +
+  geom_boxplot(alpha=0.4) +
+  labs(x='Tipo de país', y='Penetración de internet (%)',
+       tittle='Penetración de internet en paises de LATAM con alto y bajo PIB per cápita') +
+  theme(legend.position = 'none')+
+  theme(panel.background = element_blank(),panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank())
