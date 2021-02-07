@@ -1,6 +1,7 @@
 library(dplyr)
 library(readr)
 library(ggplot2)
+library(plotly)
 
 # Import document
 orangeec <- read_csv("Orange-Economy-master/orangeec.csv")
@@ -56,3 +57,21 @@ ggplot(orangeec, aes(x=`Strong_economy`, y=`Internet penetration % population`,
   theme(legend.position = 'none')+
   theme(panel.background = element_blank(),panel.grid.major = element_blank(),
         panel.grid.minor = element_blank())
+
+#EDA Scatterplot 2 var using plotly
+ggplot(orangeec, aes(x=`Internet penetration % population`, y=`Creat Ind % GDP`)) + 
+  geom_point(aes(color=factor(Strong_economy), size= `GDP.Growth..`)) + 
+  labs(x='Penetración de internet', y='Aporte de la economía naranga al PIB',
+                          title='Internet y aporte de la economía naranja según el crecimiento del PIB') +
+  theme(legend.position = 'none')+
+  theme(panel.background = element_blank(),panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank())
+
+my_graph <- ggplot(orangeec, aes(x=`Internet penetration % population`, y=`Creat Ind % GDP`,
+                                label=row.names(orangeec))) +
+  geom_point() + 
+labs(x='Penetración de internet', y='Aporte de la economía naranga al PIB'
+     title='Penetración de internet y su aporte a la economía naranja')
+
+p = ggplotly(my_graph)
+p
