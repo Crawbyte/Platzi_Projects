@@ -18,3 +18,12 @@ pairs(newdata)
 cor(orangeec[,2,6],use= 'complete.obs')
 cor(orangeec[,5,10],use= 'complete.obs')
 pairs(newdata, use= 'complete.obs')
+
+# Standard deviation
+desv <- sd(orangeec$`Internet penetration % population`, na.rm = TRUE)
+
+# Mean
+prom <- mean(orangeec$`Internet penetration % population`, na.rm = TRUE)
+
+# Variation coefficient
+CoefVar <- (desv/prom)*100
