@@ -15,4 +15,6 @@ newdata <- subset(orangeec, select=c(5, 6, 10, 11, 12, 13))
 pairs(newdata)
 
 # Correlation
-cor(orangeec[,2,6], use='complete.obs')
+cor(orangeec[,2,6],use= 'complete.obs')
+cor(orangeec[,5,10],use= 'complete.obs')
+pairs(newdata, use= 'complete.obs')
