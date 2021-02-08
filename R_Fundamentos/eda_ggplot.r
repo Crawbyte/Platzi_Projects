@@ -6,7 +6,7 @@ library(plotly)
 # Import document
 orangeec <- read_csv("Orange-Economy-master/orangeec.csv")
 
-#EDA Scatter Plot
+# EDA Scatter Plot
 plot(orangeec$Unemployment ~ orangeec$`Education invest % GDP`,
      xlab='Inversión educación (%PIB)', ylab = 'Desempleo',
      main='Relación de inversión en educación y desempleo')
@@ -15,7 +15,7 @@ plot(orangeec$`GDP PC` ~ orangeec$`Creat Ind % GDP`,
      xlab='Aporte de economía naranja al PIB', ylab = 'PIB per capita',
      main='Economía naranja en el PIB per capita')
 
-#EDA Histogram 
+# EDA Histogram 
 ggplot()+geom_histogram(data=orangeec, 
                         aes (x=`GDP PC`), fill='blue', color='red', 
                         binwidth= 2000 )+
@@ -34,7 +34,7 @@ ggplot()+geom_histogram(data=orangeec,
   theme(panel.background = element_blank(),panel.grid.major = element_blank(),
         panel.grid.minor = element_blank())
 
-#EDA Boxplot
+# EDA Boxplot
 economy <- mean(orangeec$`GDP PC`)
 orangeec <- orangeec %>%
   mutate(Strong_economy = ifelse(`GDP PC` <economy,
@@ -58,7 +58,7 @@ ggplot(orangeec, aes(x=`Strong_economy`, y=`Internet penetration % population`,
   theme(panel.background = element_blank(),panel.grid.major = element_blank(),
         panel.grid.minor = element_blank())
 
-#EDA Scatterplot 2 var using plotly
+# EDA Scatterplot 2 var using plotly
 ggplot(orangeec, aes(x=`Internet penetration % population`, y=`Creat Ind % GDP`)) + 
   geom_point(aes(color=factor(Strong_economy), size= `GDP.Growth..`)) + 
   labs(x='Penetración de internet', y='Aporte de la economía naranga al PIB',
@@ -74,4 +74,4 @@ labs(x='Penetración de internet', y='Aporte de la economía naranga al PIB'
      title='Penetración de internet y su aporte a la economía naranja')
 
 p = ggplotly(my_graph)
-p
+
