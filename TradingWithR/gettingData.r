@@ -35,4 +35,20 @@ NFLX <- mutate(NFLX, company='Netflix', Company_ticker='NFLX')
 NFLX_2 <- T[, c(9,8,1,2,3,4,5,6,7)]
 
 # Basic analitycs
+## Big Dataset
 GEI_Index <-rbind(T_2, NFLX_2)
+GEI_Index$Open = gsub(',','',
+                      GEI_Index$Open)%>%
+  as.numeric()
+summary(GEI_Index)
+sd(GEI_Index$Adj.Close)
+
+## T Coefficient 
+meanT <- mean(T$Adj.Close)
+sdT <- sd(T$Adj.Close)
+coefT <- (sdT/meanT)*100 
+
+## NFLX Coefficient
+meanNFLX <- mean(NFLX$Adj.Close)
+sdNFLX <- sd(NFLX$Adj.Close)
+coefNFLX <- (sdNFLX/meanNFLX)*100 
