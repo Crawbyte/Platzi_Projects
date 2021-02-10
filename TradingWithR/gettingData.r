@@ -4,12 +4,15 @@ install.packages("PerformanceAnalytics")
 install.packages("dplyr")
 install.packages("caret")
 install.packages("tidyverse")
+install.packages("tibble")
 
 library(quantmod)
 library(PerformanceAnalytics)
 library(dplyr)
 library(caret)
 library(tidyverse)
+library(tibble)
+library(ggplot2)
 
 #Import data of AT&T from Yahoo Finance
 
@@ -52,3 +55,26 @@ coefT <- (sdT/meanT)*100
 meanNFLX <- mean(NFLX$Adj.Close)
 sdNFLX <- sd(NFLX$Adj.Close)
 coefNFLX <- (sdNFLX/meanNFLX)*100 
+
+## 
+dates <- '2019-2-10'
+tickers <- c('T', 'NFLX')
+
+portfolioPrices <- NULL 
+for(ticker in tickers){
+  portfolioPrices <- cbind(portfolioPrices,
+                          getSymbols.yahoo(ticker,
+                                           from='2019-2-10',
+                                           periodicity ="daily", auto.assign=FALSE)[,6])
+}
+portfolioPrices <- as.data.frame(portfolioPrices)
+portfolioPrices <- rownames_to_column(portfolioPrices, var='date')
+
+df <- portfolioPrices %>%
+  select(date, T.Adjusted, NFLX.Adjusted) %>%
+  gather(key='var', value='value', -date)
+
+# Graphics
+ggplot(df, aes(x=df$date, y=df$value)) +
+  geom_line(aes(group=var, linetype= var)) +
+  labs(title='Adjusted price fluctuation')
