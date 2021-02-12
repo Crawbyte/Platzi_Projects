@@ -5,6 +5,7 @@ install.packages("dplyr")
 install.packages("caret")
 install.packages("tidyverse")
 install.packages("tibble")
+install.packages("xts")
 
 library(quantmod)
 library(PerformanceAnalytics)
@@ -13,6 +14,7 @@ library(caret)
 library(tidyverse)
 library(tibble)
 library(ggplot2)
+library(xts)
 
 #Import data of AT&T from Yahoo Finance
 
@@ -78,3 +80,45 @@ df <- portfolioPrices %>%
 ggplot(df, aes(x=df$date, y=df$value)) +
   geom_line(aes(group=var, linetype= var)) +
   labs(title='Adjusted price fluctuation')
+
+## AT&T Daily Return
+TClose <- getSymbols.yahoo("T", from=Date, auto.assign = F)[,6]
+Trets <- na.omit(dailyReturn(TClose, type="log")) 
+chartSeries(Trets)
+
+### Candle chart
+getSymbols( Symbols="T", src="yahoo",
+            from = Date,
+            to = "2020-02-10")
+
+barChart(T, theme = "white")  
+
+### Histogram 
+hist(T$T.Close, breaks= 60, col="blue")    
+
+## Netflix Daily Return
+NFLXClose <- getSymbols.yahoo("NFLX", from=Date, auto.assign = F)[,6]
+NFLXrets <- na.omit(dailyReturn(NFLXClose, type="log")) 
+chartSeries(NFLXrets)
+
+### Candle chart
+getSymbols( Symbols="NFLX", src="yahoo",
+            from = Date,
+            to = "2020-02-10")
+
+barChart(NFLX, theme = "white")  
+
+### Histogram 
+hist(NFLX$NFLX.Close, breaks= 60, col="blue")   
+
+# Technical analysis AT&T
+T %>% Ad() %>% chartSeries()
+T %>% chartSeries(TA='addBBands();addVo();addMACD();addRSI();
+                  addATR()',
+                  subset='2020')  
+
+# Technical analysis NFLX
+NFLX %>% Ad() %>% chartSeries()
+NFLX %>% chartSeries(TA='addBBands();addVo();addMACD();addRSI();
+                  addATR()',
+                  subset='2020')
