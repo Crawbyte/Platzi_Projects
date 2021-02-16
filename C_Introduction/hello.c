@@ -7,10 +7,12 @@ int main()
 Basic types:
 Aritmeticos:
     (A) Valores enteros
-                    int 2 o 4 bytes -2,147,483,648 to -2,147,483,648
+                    char 1 Byte -128 to 127
+                    unsigned char 1 Byte 0 to 255 
+                    int 2 o 4 Byte -2,147,483,648 to -2,147,483,648
                     unsigned int 0 to 65,535
-                    short 2 Bytes 0 to 65,535
-                    long 8 bytes 
+                    short 2 Byte 0 to 65,535
+                    long 8 Byte 
 
 
     (B) Punto flotante 
