@@ -1,4 +1,4 @@
 Links = //div/a[contains(@class, "kicker")]/@href
-Título = //div/h3[contains(@class, "kicker")]/following-sibling::h2/a/text()
-Resumen = //div[@class="lead"]/p/text()
-Cuerpo = //div[@class="html-content"]/p/text()
+Title = //div/h3[contains(@class, "kicker")]/following-sibling::h2/a/text()
+Summary = //div[@class="lead"]/p/text()
+Body = //div[@class="html-content"]/p/text()
